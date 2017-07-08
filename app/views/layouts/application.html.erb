@@ -10,13 +10,11 @@
 
   <body>
   <% if user_signed_in? %>
-    <span>Здравствуйте, <%= current_user.email %></span>
-    <%= link_to 'Log out', destroy_user_session_path, :method => :delete, data: { confirm: 'Are you leaving already?'} %>
+    <span>Hello, <%= current_user.email.split('@')[0] %></span>
+    <%= link_to 'Log out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you leaving already?'} %>
 <% else %>
-    <%= link_to 'Log in', new_user_session_path %> или <%= link_to 'Sign up', new_user_registration_path %>
+    <%= link_to 'Log in', new_user_session_path %> or <%= link_to 'Sign up', new_user_registration_path %>
 <% end %>
-    <!-- <a href="/users/sign_in">Sign in</a> |
-    <a href="/users/sign_out" data-method="delete">Sign out</a> -->
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
