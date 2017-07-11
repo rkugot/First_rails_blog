@@ -1,27 +1,15 @@
-<h1>Contact us</h1>
+<div class="container">
+  <h2>Contact us</h2>
 
-<%= form_for :contact, url: '/contacts' do |f| %>
-  <% if @contact && @contact.errors.any? %>
-    <p>
-      <ul>
-      <% @contact.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </p>
+  <%= simple_form_for :contact, url: contacts_path do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email, autofocus: true %>
+      <%= f.input :message %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'Send message' , class: 'btn btn-primary' %>
+    </div>
   <% end %>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
 
-  <p>
-    <%= f.label :message %><br />
-    <%= f.text_area :message %>
-  </p>
-
-  <p>
-    <%= f.submit 'Send message' %>
-  </p>
-
-<% end %>
+</div>
