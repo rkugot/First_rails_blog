@@ -1,44 +1,53 @@
-<h1><%= @article.title %></h1>
-<p>
-  <%= @article.text %>
-</p>
-<p> 
-  <%= link_to 'Edit', edit_article_path(@article) %> | 
-  <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?'} %>
-</p>
-<h2>Comments:</h2>
-<p>
-<% @article.comments.each do |comment|%>
-  <p>
-    <i><%= comment.author %> said:</i><br />
-    <%= comment.body %>
-  </p>
-  <hr />
-<% end %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <h1><%= @article.title %></h1>
+    <p>
+      <%= @article.text %>
+    </p>
+    <p> 
+      <%= link_to 'Edit', edit_article_path(@article) %> | 
+      <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?'} %>
+    </p>
+    <h3>Comments:</h3>
+    <p>
+    <% @article.comments.each do |comment|%>
+      <p>
+        <i><%= comment.author %> said:</i><br />
+        <%= comment.body %>
+      </p>
+      <hr />
+    <% end %>
+    </p>
+    </div>
+  </div>
 
-<h2>Add comment:</h2>
-<p>
-<%= form_for([@article, @article.comments.build]) do |f| %>
-  <% if user_signed_in? %>
-  <p>
-    <%= current_user.username %>
-  </p>
-  <% else %>
-  <p>
-    <%= link_to 'Log in', new_user_session_path %> to leave comment 
-  </p>
-  <% end %>
+  <h2>Add comment:</h2>
+  <div class="row">
+    <div class="col-md-6">
+    <p>
+    <%= form_for([@article, @article.comments.build]) do |f| %>
+      <% if user_signed_in? %>
+      <p>
+        <%= current_user.username %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to 'Log in', new_user_session_path %> to leave comment 
+      </p>
+      <% end %>
 
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
+      <p>
+        <%= f.label :body %><br />
+        <%= f.text_area :body, class: 'form-control', rows: '3' %>
+      </p>
 
-  <p>
-    <%= f.submit %>
-  </p>
+      <p>
+        <%= f.submit 'Add comment', class: 'btn btn-primary' %>
+      </p>
 
-<% end %>
-</p>
-
+    <% end %>
+    </p>
+    </div>
+  </div>
+</div>
